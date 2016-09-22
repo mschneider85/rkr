@@ -2,10 +2,14 @@ doctype html
 html
   = render 'shared/head'
   body
-    .container
-      = render 'shared/navbar'
-      section.main
-        = render 'shared/flash_messages'
-        = yield
-      section.footer
-        = render 'shared/footer'
+    .table-container
+      .table-block.footer-push
+        .container
+          = render 'shared/navbar'
+          section.main
+            = render 'shared/flash_messages'
+            = yield
+      .table-block
+        .container
+          footer#footer
+            = render 'shared/footer'

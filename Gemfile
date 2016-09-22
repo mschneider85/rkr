@@ -17,14 +17,17 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails'
 gem 'font-ionicons-rails'
+
 gem 'devise'
+gem 'omniauth-github'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
+  gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'web-console'

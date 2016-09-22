@@ -13,4 +13,9 @@ nav.navbar
             li.popover-item
               a.popover-link href="#" Link2asdasd
       li.navbar-item
-        a.navbar-link href="#" Sign in
+        - if user_signed_in?
+          = link_to destroy_user_session_path, method: :delete, class: 'navbar-link' do
+            | Sign out
+        - else
+          = link_to new_user_session_path, class: 'navbar-link' do
+            | Sign in

@@ -13,9 +13,19 @@ body {
   padding: 0;
 }
 
-.container {
-  min-height: 100%;
-  position: relative;
+.table-container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.table-block {
+  display: table-row;
+  height: 1px;
+}
+
+.footer-push {
+  height: auto;
 }
 
 .main {

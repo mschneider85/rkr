@@ -1,0 +1,11 @@
+doctype html
+html
+  = render 'shared/head'
+  body
+    .container
+      = render 'shared/navbar'
+      section.main
+        = render 'shared/flash_messages'
+        = yield
+      section.footer
+        = render 'shared/footer'

@@ -1,0 +1,14 @@
+/.bundle
+
+/config/database.yml
+
+/.byebug_history
+
+/public/uploads
+
+.rubocop.yml
+
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep

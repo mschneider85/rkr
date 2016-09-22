@@ -1,0 +1,40 @@
+.flash.alert {
+    background-color: rgba(255, 255, 255, 0.9);
+  	color: #555;
+  	border-radius: 10px;
+  	padding: 12px 36px 10px;
+  	margin: 10px;
+    font-size: 12px;
+
+    > .element {
+      display: table-cell;
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    span {
+      font-weight: bold;
+  		text-transform: uppercase;
+    }
+
+    &.alert-error {
+    	border: 1px solid #f5aca6;
+    }
+
+    &.alert-success {
+    	border: 1px solid #a6ca8a;
+    }
+
+    &.alert-alert {
+    	border: 1px solid #f2c779;
+    }
+
+    &.alert-notice {
+    	border: 1px solid #8ed9f6;
+    }
+}
+
+.flash-close {
+  color: #222;
+  float: right;
+}

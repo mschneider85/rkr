@@ -1,0 +1,14 @@
+- flash.each do |name, msg|
+  - if msg.is_a?(String) && %w(notice success error alert).include?(name)
+    div class=(('flash alert alert-') + name)
+      .element
+        span= [name, ': '].join
+        = msg
+      .element
+        a.flash-close href="#"
+          = ion_icon 'close-round'
+coffee:
+  $('.flash.alert').delay(8000).fadeOut(2000)
+  $('.flash-close').click ->
+    $('.flash.alert').hide()
+    false

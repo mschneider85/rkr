@@ -1,0 +1,14 @@
+.footer {
+  border-top: 1px solid $border-color;
+  bottom: 0;
+  height: 2.5em;
+  left: 0;
+  position: absolute;
+  width: 100%;
+
+  .footer-content {
+    color: $muted-color;
+  	padding: .5em .5em 0;
+    text-align: right;
+	}
+}

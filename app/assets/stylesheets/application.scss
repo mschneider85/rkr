@@ -1,0 +1,35 @@
+@import 'variables';
+@import 'normalize';
+@import 'skeleton';
+@import 'ionicons';
+@import 'layout/navbar', 'layout/stopper', 'layout/footer';
+@import 'popover';
+@import 'flash-messages';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  min-height: 100%;
+  position: relative;
+}
+
+.main {
+  margin-top: 1em;
+}
+
+.button i {
+  font-size: large;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+a {
+  &.active {
+    color: $active-color;
+  }
+}

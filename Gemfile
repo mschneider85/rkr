@@ -21,6 +21,7 @@ gem 'simple_form'
 
 gem 'devise'
 gem 'omniauth-github'
+gem 'omniauth-bitbucket'
 
 group :development, :test do
   gem 'pry-rails'

@@ -3,7 +3,8 @@ nav.navbar
   .container
     ul.navbar-list
       li.navbar-item
-        a.navbar-link href="#" Home
+        = link_to root_path, class: 'navbar-link' do
+          | Home
       li.navbar-item
         a.navbar-link href="#" data-popover="#codeNavPopover" Code
         .popover#codeNavPopover

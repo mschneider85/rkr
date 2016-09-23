@@ -1,0 +1,8 @@
+- if devise_mapping.omniauthable?
+  - resource_class.omniauth_providers.each do |provider|
+    label.label-placeholder
+    = link_to omniauth_authorize_path(resource_name, provider), class: 'button button-primary button-block' do
+      - case provider
+      - when :github
+        = ion_icon 'social-github'
+      = "Sign in with #{OmniAuth::Utils.camelize(provider)}"

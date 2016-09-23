@@ -1,0 +1,20 @@
+.field_with_errors {
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  select {
+    border: 1px solid #f5aca6;
+  }
+
+  .error {
+    color: #f5aca6;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+}

@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails'
 gem 'font-ionicons-rails'
+gem 'simple_form'
 
 gem 'devise'
 gem 'omniauth-github'
@@ -31,6 +32,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'web-console'
+  gem 'meta_request'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

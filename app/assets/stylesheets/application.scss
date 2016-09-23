@@ -2,15 +2,25 @@
 @import 'normalize';
 @import 'skeleton';
 @import 'ionicons';
-@import 'layout/navbar', 'layout/stopper', 'layout/footer';
+@import 'scaffold/navbar', 'scaffold/stopper', 'scaffold/footer';
 @import 'popover';
 @import 'flash-messages';
+@import 'forms/checkbox', 'forms/form-errors', 'forms/password-reveal', 'forms/strike';
 
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+label {
+  display: inline-block;
+
+  &.label-placeholder {
+    display: block;
+    padding: 1.2rem;
+  }
 }
 
 .table-container {
@@ -36,6 +46,10 @@ body {
   font-size: large;
   margin-right: 4px;
   vertical-align: middle;
+}
+
+.button-block {
+  display: block;
 }
 
 a {

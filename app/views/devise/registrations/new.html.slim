@@ -1,0 +1,15 @@
+h2
+  | Sign up
+.row
+  .one-half.column
+    = render 'devise/shared/omniauth'
+    .strike
+      span or
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :email, autofocus: true
+        = f.input :password, as: :password_reveal, placeholder: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+        = f.input :password_confirmation
+      .form-actions
+        = f.button :submit, "Sign up"
+    = render "devise/shared/links"

@@ -1,0 +1,33 @@
+.strike {
+  display: block;
+  margin: 2em 0;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+
+  > span {
+    color: $understatement-color;
+    display: inline-block;
+    position: relative;
+  }
+
+  > span::before {
+    margin-right: 15px;
+    right: 100%;
+  }
+
+  > span::after {
+    left: 100%;
+    margin-left: 15px;
+  }
+}
+
+.strike > span::before,
+.strike > span::after {
+  background: #e1e1e1;
+  content: '';
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+}

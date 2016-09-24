@@ -15,7 +15,7 @@ nav.navbar
               a.popover-link href="#" Link2asdasd
       li.navbar-item.avatar-wrapper
         - if user_signed_in?
-          = image_tag current_user.provider_avatar
+          = image_tag current_user.avatar
         - else
           = ion_icon 'person'
       li.navbar-item.navbar-item-login

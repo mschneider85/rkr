@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails'
 gem 'font-ionicons-rails'
+gem 'font-awesome-sass'
 gem 'simple_form'
 
 gem 'devise'
@@ -37,6 +38,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rack-mini-profiler'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

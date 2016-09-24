@@ -8,7 +8,7 @@
   input[type="password"],
   textarea,
   select {
-    border: 1px solid #f5aca6;
+    @include thin-border(#f5aca6);
   }
 
   .error {

@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   background: #fff;
-  border: 1px solid #eee;
+  @include thin-border(#eee);
   border-radius: 4px;
   top: 92%;
   left: -50%;

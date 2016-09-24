@@ -71,6 +71,8 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.14)
+    font-awesome-sass (4.6.2)
+      sass (>= 3.2)
     font-ionicons-rails (2.0.1.5)
       railties (>= 3.2, < 6.0)
     globalid (0.3.7)
@@ -152,6 +154,8 @@ GEM
     rack (2.0.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
+    rack-mini-profiler (0.10.1)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -242,6 +246,7 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.2)
   devise
+  font-awesome-sass
   font-ionicons-rails
   jbuilder (~> 2.5)
   jquery-rails
@@ -254,6 +259,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma (~> 3.0)
+  rack-mini-profiler
   rails (~> 5.0.0)
   sass-rails (~> 5.0)
   simple_form

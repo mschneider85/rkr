@@ -5,4 +5,6 @@
       - case provider
       - when :github
         = ion_icon 'social-github'
+      - when :bitbucket
+        = icon 'bitbucket'
       = "Sign in with #{OmniAuth::Utils.camelize(provider)}"

@@ -1,0 +1,10 @@
+$("<%=j render('snippets', snippets: @snippets) %>")
+  .appendTo($(".infinite-table"));
+
+<% if @snippets.last_page? %>
+  $('.pagination')
+    .html("No more snippets.");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@snippets, 'Next Page', remote: true) %>");
+<% end %>

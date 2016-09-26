@@ -1,4 +1,11 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require codemirror
+#= require codemirror/modes/ruby
+#= require codemirror/addons/selection/active-line
+#= require codemirror/addons/selection/selection-pointer.js
+#= require codemirror/addons/edit/matchbrackets
+#= require codemirror/addons/edit/closebrackets
+#= require codemirror/addons/display/rulers
 #= require_tree .

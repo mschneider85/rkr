@@ -1,0 +1,6 @@
+= link_to new_snippet_path, class: 'button' do
+  | New
+.infinite-table
+  = render 'snippets', snippets: @snippets
+.p.pagination
+  = link_to_next_page(@snippets, 'Next Page', remote: true)

@@ -19,10 +19,14 @@ gem 'slim-rails'
 gem 'font-ionicons-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem 'codemirror-rails'
+gem 'rouge', '~> 2.0', '>= 2.0.6'
 
 gem 'devise'
 gem 'omniauth-github'
 gem 'omniauth-bitbucket'
+
+gem 'kaminari'
 
 group :development, :test do
   gem 'pry-rails'

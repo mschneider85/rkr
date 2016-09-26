@@ -1,0 +1,9 @@
+.snippet-editor
+  = simple_form_for snippet do |f|
+    .form-inputs
+      = f.input :title
+      = f.input :body, input_html: { class: 'edit-code' }
+      = f.input :language, collection: Snippet.languages.keys, label_method: lambda { |language| Snippet.human_enum_name(:language, language) }
+      = f.input :author_id, as: :hidden, input_html: { value: current_user.id } if current_user
+    .form-actions
+      = f.button :submit, "Save"

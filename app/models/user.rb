@@ -2,6 +2,7 @@ class User < ApplicationRecord
   default_scope { order(:created_at) }
 
   has_many :identities, dependent: :destroy
+  has_many :snippets, foreign_key: :author_id
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable

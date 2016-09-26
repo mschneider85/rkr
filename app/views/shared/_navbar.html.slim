@@ -6,6 +6,9 @@ nav.navbar
         = link_to root_path, class: 'navbar-link' do
           | Home
       li.navbar-item
+        = link_to snippets_path, class: 'navbar-link' do
+          | Snippets
+      li.navbar-item
         a.navbar-link href="#" data-popover="#codeNavPopover" Code
         .popover#codeNavPopover
           ul.popover-list

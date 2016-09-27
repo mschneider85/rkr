@@ -1,3 +1,6 @@
+- content_for :head do
+  = tag('meta', { name: 'turbolinks-cache-control', content: 'no-cache' }, true)
+
 .snippet-editor
   = simple_form_for snippet do |f|
     .form-inputs
@@ -6,4 +9,4 @@
       = f.input :language, collection: Snippet.languages.keys, label_method: lambda { |language| Snippet.human_enum_name(:language, language) }
       = f.input :author_id, as: :hidden, input_html: { value: current_user.id } if current_user
     .form-actions
-      = f.button :submit, "Save"
+      = f.button :submit, 'Save'

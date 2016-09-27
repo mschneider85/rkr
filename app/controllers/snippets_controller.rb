@@ -10,6 +10,7 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(snippet_params)
     if @snippet.save
+      CreateTempAssociationJob.perform_async(@snippet, cookies[:temp_association_uuid])
       redirect_to snippets_path, notice: 'Snippet successfully created.'
     else
       render :new
@@ -19,6 +20,6 @@ class SnippetsController < ApplicationController
   private
 
   def snippet_params
-    params.require(:snippet).permit(:author_id, :session_id, :title, :body, :language)
+    params.require(:snippet).permit(:author_id, :title, :body, :language)
   end
 end

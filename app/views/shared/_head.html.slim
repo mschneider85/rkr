@@ -1,10 +1,9 @@
 head
   title RKR
   = csrf_meta_tags
-  
   meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
   meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no"
-
+  = yield :head
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   = stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Raleway:400,300,600'

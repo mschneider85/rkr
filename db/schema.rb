@@ -10,17 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924212732) do
+ActiveRecord::Schema.define(version: 20160927172435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-
-  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "identities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "user_id",         null: false
@@ -35,14 +29,22 @@ ActiveRecord::Schema.define(version: 20160924212732) do
 
   create_table "snippets", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "author_id"
-    t.string   "session_id"
     t.string   "title"
     t.text     "body"
     t.integer  "language",   default: 0, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["author_id"], name: "index_snippets_on_author_id", using: :btree
-    t.index ["session_id"], name: "index_snippets_on_session_id", using: :btree
+  end
+
+  create_table "temp_associations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "temp_associatable_type"
+    t.uuid     "temp_associatable_id"
+    t.uuid     "uuid"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["temp_associatable_type", "temp_associatable_id"], name: "index_polymorphic_temp_associations", unique: true, using: :btree
+    t.index ["uuid"], name: "index_temp_associations_on_uuid", using: :btree
   end
 
   create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

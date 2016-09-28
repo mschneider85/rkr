@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :identities, dependent: :destroy
   has_many :snippets, foreign_key: :author_id
+  has_many :votes, foreign_key: :voter_id
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
@@ -23,6 +24,10 @@ class User < ApplicationRecord
         identity.avatar = auth.info.avatar if auth.info.avatar
       end
     end
+  end
+
+  def reputation
+    # TODO: get reputation / karma
   end
 
   private

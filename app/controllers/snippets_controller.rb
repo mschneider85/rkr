@@ -1,6 +1,6 @@
 class SnippetsController < ApplicationController
   def index
-    @snippets = Snippet.order_weekly.page(params[:page]).per(10)
+    @snippets = Snippet.trending.includes(:votes).page(params[:page]).per(10)
   end
 
   def new
@@ -10,7 +10,7 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(snippet_params)
     if @snippet.save
-      CreateTempAssociationJob.perform_async(@snippet, cookies[:temp_association_uuid])
+      CreateTempAssociation.call(@snippet, cookies[:temp_association_uuid])
       redirect_to snippets_path, notice: 'Snippet successfully created.'
     else
       render :new

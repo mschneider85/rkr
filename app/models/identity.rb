@@ -15,16 +15,14 @@ class Identity < ApplicationRecord
     else
       registered_user = User.where(email: auth.info.email).take
       if registered_user
-        registered_user.create_identity_for(auth)
-        registered_user
+        CreateOmniauthIdentity.call(registered_user, auth)
       else
-        user = User.create do |user|
+        new_user = User.create do |user|
           user.email = auth.info.email
           user.password = Devise.friendly_token[0, 20]
           user.confirmed_at = Time.current
         end
-        user.create_identity_for(auth)
-        user
+        CreateOmniauthIdentity.call(new_user, auth)
       end
     end
   end

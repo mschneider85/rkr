@@ -2,8 +2,10 @@ class Vote < ApplicationRecord
   belongs_to :voter, class_name: 'User'
   belongs_to :votable, polymorphic: true
 
-  validates :voter_id, uniqueness: { scope: [:votable_type, :votable_id] }
-  validates :value, inclusion: { in: [1, -1] }
+  attr_accessor :can_update_vote
+
+  validates :voter_id, uniqueness: { scope: [:votable_type, :votable_id] }, unless: :can_update_vote
+  validates :value, inclusion: { in: [1, -1] }, uniqueness: { scope: [:voter_id, :votable_type, :votable_id] }
   validate :ensure_not_author
 
   private

@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :snippets, foreign_key: :author_id
   has_many :votes, foreign_key: :voter_id
 
+  # Add more model_votes like this
+  has_many :snippet_votes, through: :snippets, source: :votes
+
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :omniauthable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, omniauth_providers: [:bitbucket, :github]
@@ -13,24 +16,20 @@ class User < ApplicationRecord
     recent_identity&.avatar || gravatar
   end
 
-  def create_identity_for(auth)
-    identities.create do |identity|
-      identity.provider = auth.provider
-      identity.uid = auth.uid
-      case auth.provider
-      when 'github'
-        identity.avatar = auth.info.image + '&s=32' if auth.info.image
-      when 'bitbucket'
-        identity.avatar = auth.info.avatar if auth.info.avatar
-      end
-    end
+  def reputation
+    snippet_votes.sum(:value)
   end
 
-  def reputation
-    # TODO: get reputation / karma
+  def can_vote?(votable, direction)
+    value = { up: 1, down: -1 }[direction]
+    is_votable?(votable) && votes.build(value: value, votable: votable, can_update_vote: true).valid?
   end
 
   private
+
+  def is_votable?(object)
+    object.class.reflect_on_association(:votes).type.present?
+  end
 
   def recent_identity
     @recent_identity ||= identities.order(last_sign_in_at: :desc).first

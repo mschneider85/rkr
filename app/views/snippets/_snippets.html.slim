@@ -1,6 +1,8 @@
 - snippets.each do |snippet|
-  p.snippet
-    = snippet.title
-  = raw rouge snippet.body, snippet.language
-  | Reputation:
-  = snippet.reputation
+  .docs-section.snippet
+    h6.docs-header
+      = snippet.title
+    = raw rouge snippet.body, snippet.language
+    .toolbar.voting.u-pull-right data-id="#{snippet.id}"
+      = render 'shared/voting', votable: snippet
+    .u-cf

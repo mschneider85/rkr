@@ -2,5 +2,5 @@
   | New
 .infinite-table
   = render 'snippets', snippets: @snippets
-.p.pagination
+.p.pagination data-title='Fetching more snippets...'
   = link_to_next_page(@snippets, 'Next Page', remote: true)

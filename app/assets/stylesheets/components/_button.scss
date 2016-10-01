@@ -1,0 +1,31 @@
+.button {
+  &.active {
+    color: #33c3f0;
+
+    &:hover {
+      color: #1eaedb;
+    }
+  }
+}
+
+.toolbar.disabled {
+  a.button {
+    pointer-events: none;
+  }
+
+  .button {
+    cursor: not-allowed;
+    opacity: .65;
+  }
+}
+
+a.button.disabled,
+a.button[disabled] {
+  pointer-events: none;
+}
+
+.button.disabled,
+.button[disabled] {
+  cursor: not-allowed;
+  opacity: .65;
+}

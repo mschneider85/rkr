@@ -1,4 +1,4 @@
-$(document).ready ->
+$(document).on 'turbolinks:load', ->
 
   $popoverLink = $('[data-popover]')
   $document = $(document)

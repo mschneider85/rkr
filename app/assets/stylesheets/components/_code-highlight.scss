@@ -59,7 +59,15 @@
 .codehilite .vg { color: #d07000; font-weight: bold } /* Name.Variable.Global */
 .codehilite .vi { color: #3030B0 } /* Name.Variable.Instance */
 .codehilite .il { color: #0000D0; font-weight: bold } /* Literal.Number.Integer.Long */
-.codehilite code {
+.codehilite {
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
   overflow: auto;
-  white-space: pre-wrap;
+
+  >code {
+    border: 0;
+    background: #fff;
+    white-space: pre;
+    word-wrap: break-word;
+  }
 }

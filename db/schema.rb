@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928165749) do
+ActiveRecord::Schema.define(version: 20160929192623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,14 @@ ActiveRecord::Schema.define(version: 20160928165749) do
     t.uuid     "author_id"
     t.string   "title"
     t.text     "body"
-    t.integer  "language",   default: 0, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "language",    default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "votes_sum",   default: 0, null: false
+    t.integer  "votes_count", default: 0, null: false
     t.index ["author_id"], name: "index_snippets_on_author_id", using: :btree
+    t.index ["votes_count"], name: "index_snippets_on_votes_count", using: :btree
+    t.index ["votes_sum"], name: "index_snippets_on_votes_sum", using: :btree
   end
 
   create_table "temp_associations", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -75,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160928165749) do
     t.integer  "value",        default: 0, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", unique: true, using: :btree
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
     t.index ["voter_id"], name: "index_votes_on_voter_id", using: :btree
   end
 

@@ -21,8 +21,7 @@ class User < ApplicationRecord
   end
 
   def can_vote?(votable, direction)
-    value = { up: 1, down: -1 }[direction]
-    is_votable?(votable) && votes.build(value: value, votable: votable, can_update_vote: true).valid?
+    is_votable?(votable) && votes.build(value: direction, votable: votable, can_update_vote: true).valid?
   end
 
   private

@@ -1,0 +1,19 @@
+.toolbar {
+  margin-left: -5px;
+
+  >.button,
+  >span,
+  >.toolbar {
+    margin-left: 5px;
+  }
+}
+
+.toolbar::before,
+.toolbar::after {
+  content: ' ';
+  display: table;
+}
+
+.toolbar::after {
+  clear: both;
+}

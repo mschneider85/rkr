@@ -24,6 +24,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_record_union (1.2.0)
+      activerecord (>= 4.0)
     activejob (5.0.0.1)
       activesupport (= 5.0.0.1)
       globalid (>= 0.3.6)
@@ -40,6 +42,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (7.1.2)
+    autoprefixer-rails (6.5.0.1)
+      execjs
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -250,6 +254,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record_union (~> 1.2)
+  autoprefixer-rails (~> 6.5, >= 6.5.0.1)
   better_errors
   binding_of_caller
   codemirror-rails

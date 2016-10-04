@@ -1,0 +1,10 @@
+$("<%=j render('links', links: @links) %>")
+  .appendTo($(".infinite-table"));
+
+<% if @links.last_page? %>
+  $('.pagination')
+    .html("No more links.");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@links, 'Next Page', remote: true) %>");
+<% end %>

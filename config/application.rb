@@ -23,5 +23,7 @@ module Rkr
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Berlin'
     config.active_job.queue_adapter = :sucker_punch
+    config.eager_load_paths += Dir[Rails.root.join('app', 'models', '{*/}')]
+    config.eager_load_paths += Dir[Rails.root.join('app', 'validators')]
   end
 end

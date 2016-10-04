@@ -1,0 +1,70 @@
+.row.url-preview
+  .one-third.column
+    - if preview.images.size + preview.videos.size == 1
+      .preview-image style=("background-image: url(\"#{preview.images[0].to_s}\");")
+    - else
+      #slider
+        a.control_next href="javascript:void(0);"
+          | >
+        a.control_prev href="javascript:void(0);"
+          | <
+        ul
+          - preview.images.each do |image|
+            li
+              .preview-images style=("background-image: url(\"#{image.to_s}\");")
+          - preview.videos.each do |video|
+            li
+              = raw video.embed_code
+  .two-thirds.column
+    h3
+      = preview.title
+      = image_tag(preview.favicon, class: 'preview-icon')
+    p= preview.description
+  = fields_for :link do |l|
+    = l.fields_for :preview do |p|
+      = p.hidden_field(:url, value: preview.url)
+      - preview.images.each do |preview_image|
+        = p.hidden_field(:images, multiple: true, value: preview_image.to_s)
+      - preview.videos.each do |preview_video|
+        = p.hidden_field(:videos, multiple: true, value: preview_video.to_s)
+      = p.hidden_field(:title, value: preview.title)
+      = p.hidden_field(:favicon, value: preview.favicon)
+      = p.hidden_field(:description, value: preview.description)
+hr
+
+coffee:
+  $(document).ready ->
+  
+    slideCount = $('#slider ul li').length
+    slideWidth = $('#slider ul li').width()
+    slideHeight = $('#slider ul li').height()
+    sliderUlWidth = slideCount * slideWidth
+
+    moveLeft = ->
+      $('#slider ul').animate { left: +slideWidth }, 200, ->
+        $('#slider ul li:last-child').prependTo '#slider ul'
+        $('#slider ul').css 'left', ''
+
+    moveRight = ->
+      $('#slider ul').animate { left: -slideWidth }, 200, ->
+        $('#slider ul li:first-child').appendTo '#slider ul'
+        $('#slider ul').css 'left', ''
+        
+    stopPlayback = ->
+      $('#slider iframe').attr('src', $('#slider iframe').attr('src'));
+
+    $('#slider').css
+      width: slideWidth
+      height: slideHeight
+    $('#slider ul').css
+      width: sliderUlWidth
+      marginLeft: -slideWidth
+    $('#slider ul li:last-child').prependTo '#slider ul'
+    
+    $('a.control_prev').click (e)->
+      stopPlayback()
+      moveLeft()
+      
+    $('a.control_next').click ->
+      stopPlayback()
+      moveRight()

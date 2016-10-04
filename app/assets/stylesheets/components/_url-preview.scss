@@ -1,0 +1,27 @@
+.url-preview {
+  .preview-images {
+    background: no-repeat center;
+    background-size: cover;
+    height: 100%;
+  }
+
+  .preview-image {
+    background: no-repeat center;
+    background-size: cover;
+    border-radius: 4px;
+    height: 100%;
+    min-height: 200px;
+  }
+
+  .url-preview iframe {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  .preview-icon {
+    margin-left: 1rem;
+    max-height: 16px;
+    max-width: 16px;
+  }
+}

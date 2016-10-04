@@ -1,0 +1,8 @@
+$('.url-preview').html("")
+
+<% if @preview %>
+  $('.url-preview')
+    .html("<%=j render('preview', preview: @preview) %>");
+<% end %>
+
+$('.button.submit-link').prop('disabled', false)

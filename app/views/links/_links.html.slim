@@ -1,0 +1,9 @@
+- links.each do |link|
+  .docs-section.link
+    h6.docs-header
+      = link.title
+    .row
+      = link_to link.url, link.url, target: '_blank'
+    .toolbar.voting.u-pull-right data-id="#{link.id}"
+      = render 'shared/voting', votable: link
+    .u-cf

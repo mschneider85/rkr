@@ -16,6 +16,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# remove this monkeypatch when the fix has been released in ruby
+# https://github.com/rhenium/ruby/commit/7a65b1c0234f07c980d317702a3ebcf6cab00e7d
+gem 'open_uri_redirections', '~> 0.2.1'
+
 gem 'sucker_punch', '~> 2.0', '>= 2.0.2'
 gem 'slim-rails'
 gem 'font-ionicons-rails'
@@ -24,6 +28,7 @@ gem 'simple_form'
 gem 'codemirror-rails'
 gem 'rouge', '~> 2.0', '>= 2.0.6'
 gem 'active_record_union', '~> 1.2'
+gem 'link_thumbnailer', '~> 3.3'
 
 gem 'devise'
 gem 'omniauth-github'

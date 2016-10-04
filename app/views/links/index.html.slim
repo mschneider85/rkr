@@ -1,0 +1,6 @@
+= link_to new_link_path, class: 'button' do
+  | New
+.infinite-table
+  = render 'links', links: @links
+.p.pagination data-title='Fetching more links...'
+  = link_to_next_page(@links, 'Next Page', remote: true)

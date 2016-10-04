@@ -1,0 +1,30 @@
+- content_for :head do
+  = tag('meta', { name: 'turbolinks-cache-control', content: 'no-cache' }, true)
+
+.link-editor
+  = simple_form_for link do |f|
+    .form-inputs
+      = f.input :title, autofocus: true
+      = f.input :url, input_html: { class: 'url-for-preview' }
+      = f.input :author_id, as: :hidden, input_html: { value: current_user.id } if user_signed_in?
+      .url-preview
+        - if link.preview
+          = render 'preview', preview: OpenStruct.new(link.preview.merge(images: link.preview['images'] || [], videos: link.preview['videos'] || []))
+    .form-actions
+      = f.button :submit, 'Save', class: 'submit-link'
+
+coffee:
+  $(document).on 'input', '.url-for-preview', (e) ->
+    if window.ajax
+      window.ajax.abort()
+    clearTimeout window.timer
+    window.timer = setTimeout((->
+      window.ajax = $.ajax(
+        url: '/links/load_preview'
+        type: 'GET'
+        data: 
+          url: $(e.target).val())
+    ), 500)
+
+  $(document).ajaxStart ->
+    $('.button.submit-link').prop('disabled', true)

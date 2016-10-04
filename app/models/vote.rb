@@ -5,7 +5,8 @@ class Vote < ApplicationRecord
   enum value: { down: -1, up: 1 }
   attr_accessor :can_update_vote
   VOTABLE_TYPES = {
-    'Snippet' => Snippet
+    'Snippet' => Snippet,
+    'Link' => Link
   }.freeze
 
   validates :voter_id, uniqueness: { scope: [:votable_type, :votable_id] }, unless: :can_update_vote

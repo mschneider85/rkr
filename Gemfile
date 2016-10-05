@@ -31,6 +31,8 @@ gem 'active_record_union', '~> 1.2'
 gem 'link_thumbnailer', '~> 3.3'
 gem 'twitter-typeahead-rails', '~> 0.11.1'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'jquery-ui-rails'
+gem 'tag-it-rails'
 
 gem 'devise'
 gem 'omniauth-github'

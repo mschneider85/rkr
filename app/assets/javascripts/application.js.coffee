@@ -9,4 +9,6 @@
 #= require codemirror/addons/edit/closebrackets
 #= require codemirror/addons/display/rulers
 #= require twitter/typeahead
+#= require jquery-ui
+#= require tag-it
 #= require_tree .

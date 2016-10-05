@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def index
-    @tags = ActsAsTaggableOn::Tag.order(:name).where('name ILIKE ?', "%#{params[:query]}%").limit(5)
+    @tags = Tag.order(:taggings_count).where('name ILIKE ?', "%#{params[:query]}%").limit(5).pluck(:name)
     render json: @tags
   end
 end

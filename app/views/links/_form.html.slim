@@ -10,6 +10,8 @@
       .url-preview
         - if link.preview
           = render 'preview', preview: OpenStruct.new(link.preview.merge(images: link.preview['images'] || [], videos: link.preview['videos'] || []))
+      = f.label :tag_list
+      = f.select :tag_list, link.tag_list, {}, { multiple: true, data: { role: 'tagsinput' }, id: 'tag-list-input' }
     .form-actions
       = f.button :submit, 'Save', class: 'submit-link'
 
@@ -23,8 +25,35 @@ coffee:
         url: '/links/load_preview'
         type: 'GET'
         data: 
-          url: $(e.target).val())
+          url: $(e.target).val()
+        beforeSend: ->
+          $('.button.submit-link').prop('disabled', true)
+      ).success (data) ->
+        if (data['status'] == 'fail')
+          $('.button.submit-link').prop('disabled', false)
+        else
+          $('.url-for-preview').blur()
     ), 500)
 
-  $(document).ajaxStart ->
-    $('.button.submit-link').prop('disabled', true)
+  tags = new Bloodhound(
+    datumTokenizer: Bloodhound.tokenizers.whitespace
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+    remote:
+      url: '/tags?query=%QUERY'
+      wildcard: "%QUERY"
+  )
+  tags.initialize()
+  
+  $('#tag-list-input').tagsinput
+    cancelConfirmKeysOnEmpty: false
+    addOnBlur: true
+    typeaheadjs:
+      name: 'tags'
+      displayKey: 'name'
+      valueKey: 'name'
+      source: tags.ttAdapter()
+  
+  $('.twitter-typeahead input').on 'focusout', ->
+    elem = $(this).closest('.bootstrap-tagsinput').parent().find('#tag-list-input')
+    elem.tagsinput 'add', $(this).val()
+    $(this).typeahead 'val', ''

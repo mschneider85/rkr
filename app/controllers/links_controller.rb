@@ -20,11 +20,12 @@ class LinksController < ApplicationController
 
   def load_preview
     @preview = Link.parse_preview(params[:url])
+    render json: { status: :fail } unless @preview
   end
 
   private
 
   def link_params
-    params.require(:link).permit(:author_id, :title, :url, preview: [:url, :title, :favicon, :description, images: [], videos: []])
+    params.require(:link).permit(:author_id, :title, :url, tag_list: [], preview: [:url, :title, :favicon, :description, images: [], videos: []])
   end
 end

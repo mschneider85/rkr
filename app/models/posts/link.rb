@@ -1,4 +1,5 @@
 class Link < Post
+  acts_as_taggable
   store_accessor :preview
 
   validates :title, :url, presence: true

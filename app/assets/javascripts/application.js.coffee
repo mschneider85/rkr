@@ -8,4 +8,5 @@
 #= require codemirror/addons/edit/matchbrackets
 #= require codemirror/addons/edit/closebrackets
 #= require codemirror/addons/display/rulers
+#= require twitter/typeahead
 #= require_tree .

@@ -10,9 +10,9 @@
       .url-preview
         - if link.preview
           = render 'preview', preview: OpenStruct.new(link.preview.merge(images: link.preview['images'] || [], videos: link.preview['videos'] || []))
-      / = f.label :tag_list
-      / = f.select :tag_list, link.tag_list, {}, { multiple: true, data: { role: 'tagsinput' }, id: 'tag-list-input' }
-      = f.input :tag_list, input_html: { id: 'tag-list-input' }
+      ul#tag-list-input name=('link[tag_list]')
+        - link.tag_list.each do |tag|
+          li= tag
     .form-actions
       = f.button :submit, 'Save', class: 'submit-link'
 
@@ -37,42 +37,18 @@ coffee:
     ), 500)
   
   $('#tag-list-input').tagit
-    tagSource: (search, showChoices) ->
-      that = this
-      if window.ajax
-        window.ajax.abort()
-      clearTimeout window.timer
-      window.timer = setTimeout((->
-        window.ajax = $.ajax
+    removeConfirmation: true
+    caseSensitive: false
+    fieldName: 'link[tag_list][]'
+    autocomplete:
+      source: (search, showChoices) ->
+        that = this
+        if ajaxTags && ajaxTags.readyState != 4
+          ajaxTags.abort()
+        ajaxTags = $.ajax
           url: '/tags'
           data: query: search.term
           success: (choices) ->
             showChoices that._subtractArray(choices, that.assignedTags())
-      ), 500)
-    show_tag_url: '/tags/'
-    autocomplete: { delay: 0, minLength: 2 }
-    removeConfirmation: true
-    caseSensitive: false
-
-/ tags = new Bloodhound(
-/   datumTokenizer: Bloodhound.tokenizers.whitespace
-/   queryTokenizer: Bloodhound.tokenizers.whitespace
-/   remote:
-/     url: '/tags?query=%QUERY'
-/     wildcard: "%QUERY"
-/ )
-/ tags.initialize()
-/ 
-/ $('#tag-list-input').tagsinput
-/   cancelConfirmKeysOnEmpty: false
-/   addOnBlur: true
-/   typeaheadjs:
-/     name: 'tags'
-/     displayKey: 'name'
-/     valueKey: 'name'
-/     source: tags.ttAdapter()
-/ 
-/ $('.twitter-typeahead input').on 'focusout', ->
-/   elem = $(this).closest('.bootstrap-tagsinput').parent().find('#tag-list-input')
-/   elem.tagsinput 'add', $(this).val()
-/   $(this).typeahead 'val', ''
+      delay: 300
+      minLength: 2

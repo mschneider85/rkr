@@ -10,7 +10,8 @@
       .url-preview
         - if link.preview
           = render 'preview', preview: OpenStruct.new(link.preview.merge(images: link.preview['images'] || [], videos: link.preview['videos'] || []))
-      ul#tag-list-input name=('link[tag_list]')
+      = f.label :tag_list
+      ul.tag-list-input name=('link[tag_list]')
         - link.tag_list.each do |tag|
           li= tag
     .form-actions
@@ -35,20 +36,3 @@ coffee:
         else
           $('.url-for-preview').blur()
     ), 500)
-  
-  $('#tag-list-input').tagit
-    removeConfirmation: true
-    caseSensitive: false
-    fieldName: 'link[tag_list][]'
-    autocomplete:
-      source: (search, showChoices) ->
-        that = this
-        if ajaxTags && ajaxTags.readyState != 4
-          ajaxTags.abort()
-        ajaxTags = $.ajax
-          url: '/tags'
-          data: query: search.term
-          success: (choices) ->
-            showChoices that._subtractArray(choices, that.assignedTags())
-      delay: 300
-      minLength: 2

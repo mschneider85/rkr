@@ -2,7 +2,7 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require codemirror
-#= require codemirror/modes/ruby
+#= require codemirror/addons/mode/multiplex
 #= require codemirror/addons/selection/active-line
 #= require codemirror/addons/selection/selection-pointer.js
 #= require codemirror/addons/edit/matchbrackets

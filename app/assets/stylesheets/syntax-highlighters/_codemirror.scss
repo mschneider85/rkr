@@ -1,0 +1,11 @@
+.CodeMirror {
+  @include thin-border(#d1d1d1);
+  border-radius: 4px;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.CodeMirror-scroll {
+  min-height: 200px;
+  max-height: 500px;
+}

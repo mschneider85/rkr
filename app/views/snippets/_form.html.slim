@@ -6,7 +6,11 @@
     .form-inputs
       = f.input :title
       = f.input :body, input_html: { class: 'edit-code' }
-      = f.input :language, collection: Snippet.languages.keys, label_method: lambda { |language| Snippet.human_enum_name(:language, language) }
+      = f.input :language, collection: Snippet.languages.keys, label_method: lambda { |language| Snippet::LANGUAGES.find(language)[:human] }, prompt: false, input_html: { class: 'select-mode' }
+      = f.label :tag_list
+      ul.tag-list-input name=('snippet[tag_list]')
+        - snippet.tag_list.each do |tag|
+          li= tag
       = f.input :author_id, as: :hidden, input_html: { value: current_user.id } if user_signed_in?
     .form-actions
       = f.button :submit, 'Save'

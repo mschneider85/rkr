@@ -1,0 +1,84 @@
+ruby:
+  human: Ruby
+  full_name: Ruby
+  mode: text/x-ruby
+  highlight_class: ruby
+  extensions: [rb, rbw, rbx, rake, rspec]
+yaml:
+  human: YAML
+  full_name: YAML Ain’t Markup Language
+  mode: text/x-yaml
+  highlight_class: text/x-yaml
+  extensions: [yml, yaml]
+css:
+  human: CSS
+  full_name: Cascading Style Sheets
+  mode: text/css
+  highlight_class: css
+  extensions: [css]
+scss:
+  human: SCSS
+  full_name: Sassy CSS
+  mode: text/x-scss
+  highlight_class: scss
+  extensions: [scss]
+sass:
+  human: SASS
+  full_name: Syntactically Awesome Stylesheets
+  mode: text/x-sass
+  highlight_class: sass
+  extensions: [sass]
+javascript:
+  human: JavaScript
+  full_name: JavaScript
+  mode: text/javascript
+  highlight_class: javascript
+  extensions: [js, json, bson, bowerrc]
+coffeescript:
+  human: CoffeeScript
+  full_name: CoffeeScript
+  mode: text/x-coffeescript
+  highlight_class: coffeescript
+  extensions: [coffee, cson]
+html:
+  human: HTML
+  full_name: Hyper Text Markup Language
+  mode: text/html
+  highlight_class: html
+  extensions: [html, htm]
+haml:
+  human: HAML
+  full_name: HTML Abstraction Markup Language
+  mode: text/x-haml
+  highlight_class: haml
+  extensions: [haml]
+slim:
+  human: Slim
+  full_name: Slim
+  mode: application/x-slim
+  highlight_class: slim
+  extensions: [slim]
+erb:
+  human: ERB
+  full_name: Embedded Ruby
+  mode: application/x-erb
+  highlight_class: erb
+  extensions: [erb, erbsql]
+markdown:
+  human: Markdown
+  full_name: Markdown
+  mode: text/x-markdown
+  highlight_class: markdown
+  extensions: [md]
+shell:
+  human: Shell Script
+  full_name: Shell
+  mode: text/x-sh
+  highlight_class: shell
+  extensions: [sh]
+plain:
+  human: Plain Text
+  full_name: Plain Text
+  mode: text
+  highlight_class: no-highlightning
+  extensions: []

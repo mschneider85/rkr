@@ -8,3 +8,5 @@ $("<%=j render('snippets', snippets: @snippets) %>")
   $('.pagination')
     .html("<%=j link_to_next_page(@snippets, 'Next Page', remote: true) %>");
 <% end %>
+
+$(document).trigger('turbolinks:load');

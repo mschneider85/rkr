@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'callbacks' }
   resources :tags, only: :index
-  resources :snippets
+  resources :snippets do
+    get :language_code, on: :collection
+  end
   resources :links do
     get :load_preview, on: :collection
   end

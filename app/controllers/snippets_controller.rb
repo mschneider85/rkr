@@ -18,9 +18,13 @@ class SnippetsController < ApplicationController
     end
   end
 
+  def language_code
+    render plain: Snippet::LANGUAGES.find(params[:name])[:mode]
+  end
+
   private
 
   def snippet_params
-    params.require(:snippet).permit(:author_id, :title, :body, :language)
+    params.require(:snippet).permit(:author_id, :title, :body, :language, tag_list: [])
   end
 end

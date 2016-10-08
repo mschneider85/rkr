@@ -2,15 +2,10 @@ en:
   activerecord:
     attributes:
       snippet:
-        languages:
-          vim: Text
-          ruby: Ruby
-          yaml: Yaml
-          css: CSS
-          scss: SCSS
-          sass: SASS
-          js: JavaScript
-          coffee: CoffeeScript
+        title: Title
+        body: Content
+        language: Language
+        tag_list: Tags
       link:
         title: Title
         url: URL

@@ -19,8 +19,6 @@ $(document).on 'turbolinks:load', ->
               showChoices that._subtractArray(choices, that.assignedTags())
         delay: 300
         minLength: 2
-        select: (event, ui) ->
-          window.location.href = ui.item.value
 
 $(document).on 'focus', 'input[type="text"].ui-widget-content.ui-autocomplete-input', ->
   $(this).closest('.tag-list-input').addClass('focused')

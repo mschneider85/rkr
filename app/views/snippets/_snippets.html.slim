@@ -2,7 +2,9 @@
   .docs-section.snippet
     h6.docs-header
       = snippet.title
-    = raw rouge snippet.body, snippet.language
+    pre
+      code class=(snippet.highlight_class)
+        = snippet.body
     .toolbar.voting.u-pull-right data-id="#{snippet.id}"
       = render 'shared/voting', votable: snippet
     .u-cf

@@ -1,0 +1,12 @@
+#= require codemirror/modes/ruby
+#= require codemirror/modes/yaml
+#= require codemirror/modes/css
+#= require codemirror/modes/sass
+#= require codemirror/modes/haml
+#= require codemirror/modes/slim
+#= require codemirror/modes/xml
+#= require codemirror/modes/javascript
+#= require codemirror/modes/coffeescript
+#= require codemirror/modes/htmlembedded
+#= require codemirror/modes/markdown
+#= require codemirror/modes/shell

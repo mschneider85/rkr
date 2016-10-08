@@ -8,6 +8,10 @@ class Snippet < Post
     LANGUAGES.find(language)[:highlight_class]
   end
 
+  def mode
+    LANGUAGES.find(language)[:mode]
+  end
+
   class LANGUAGES
     class << self
       def all

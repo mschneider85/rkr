@@ -5,7 +5,9 @@
   margin-bottom: 2rem;
 }
 
-.CodeMirror-scroll {
-  min-height: 200px;
-  max-height: 500px;
+.snippet-editor {
+  .CodeMirror-scroll {
+    max-height: 500px;
+    min-height: 200px;
+  }
 }

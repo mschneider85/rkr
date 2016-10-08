@@ -1,10 +1,12 @@
 - snippets.each do |snippet|
-  .docs-section.snippet
-    h6.docs-header
-      = snippet.title
-    pre
-      code class=(snippet.highlight_class)
+  .card
+    .card-header
+      .card-title
+        = snippet.title
+    .card-content
+      .code data-mode=(snippet.mode)
         = snippet.body
-    .toolbar.voting.u-pull-right data-id="#{snippet.id}"
-      = render 'shared/voting', votable: snippet
-    .u-cf
+    .card-footer
+      .toolbar.voting.u-pull-right data-id="#{snippet.id}"
+        = render 'shared/voting', votable: snippet
+      .u-cf

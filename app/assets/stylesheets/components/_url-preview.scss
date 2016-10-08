@@ -24,4 +24,10 @@
     max-height: 16px;
     max-width: 16px;
   }
+
+  &.url-preview-small {
+    .preview-image {
+      min-height: 140px;
+    }
+  }
 }

@@ -269,10 +269,6 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
-    twitter-typeahead-rails (0.11.1)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
     typhoeus (1.1.0)
       ethon (>= 0.9.0)
     tzinfo (1.2.2)
@@ -334,7 +330,6 @@ DEPENDENCIES
   sucker_punch (~> 2.0, >= 2.0.2)
   tag-it-rails
   turbolinks (~> 5)
-  twitter-typeahead-rails (~> 0.11.1)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console

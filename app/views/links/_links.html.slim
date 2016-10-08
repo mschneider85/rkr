@@ -1,9 +1,20 @@
 - links.each do |link|
-  .docs-section.link
-    h6.docs-header
-      = link.title
-    .row
-      = link_to link.url, link.url, target: '_blank'
-    .toolbar.voting.u-pull-right data-id="#{link.id}"
-      = render 'shared/voting', votable: link
-    .u-cf
+  - preview = OpenStruct.new(link.preview)
+  .card
+    .card-header
+      .card-title
+        = link.title
+    .card-content
+      .row.url-preview.url-preview-small
+        .three.columns
+          .preview-image style=("background-image: url(\"#{preview.images[0].to_s}\");" if preview.images)
+        .nine.columns
+          p= link_to link.url, link.url, target: '_blank'
+          h5
+            = preview.title
+            = image_tag(preview.favicon, class: 'preview-icon') if preview.favicon
+          p= preview.description
+    .card-footer
+      .toolbar.voting.u-pull-right data-id="#{link.id}"
+        = render 'shared/voting', votable: link
+      .u-cf

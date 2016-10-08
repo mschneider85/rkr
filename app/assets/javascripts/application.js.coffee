@@ -8,7 +8,6 @@
 #= require codemirror/addons/edit/matchbrackets
 #= require codemirror/addons/edit/closebrackets
 #= require codemirror/addons/display/rulers
-#= require twitter/typeahead
 #= require jquery-ui/autocomplete
 #= require tag-it
 #= require_tree .

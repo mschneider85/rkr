@@ -8,11 +8,14 @@ class Link < Post
   before_validation { self[:url] = Link.sanitize_url(url) }
 
   def self.parse_preview(url)
-    url = Link.sanitize_url(url)
+    url = sanitize_url(url)
     begin
       preview = LinkThumbnailer.generate(url)
-      preview.favicon = preview.url + preview.favicon unless Link.valid_attribute?(:url, preview.favicon)
+      preview.favicon = preview.url + preview.favicon unless valid_attribute?(:url, preview.favicon)
       preview.videos.reject! { |video| video.embed_code.nil? }
+      if (preview.images.size + preview.videos.size).zero?
+        preview.images << preview.favicon
+      end
       preview
     rescue LinkThumbnailer::Exceptions
       false

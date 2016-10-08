@@ -11,3 +11,7 @@ en:
           sass: SASS
           js: JavaScript
           coffee: CoffeeScript
+      link:
+        title: Title
+        url: URL
+        tag_list: Tags

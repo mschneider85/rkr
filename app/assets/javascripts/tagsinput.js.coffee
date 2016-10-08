@@ -3,7 +3,10 @@ $(document).on 'turbolinks:load', ->
     $(this).tagit
       removeConfirmation: true
       caseSensitive: false
+      allowSpaces: true
       fieldName: $(taglist).attr('name') + '[]'
+      onTagExists: (func, callback) ->
+        $(callback.existingTag).animateCss('bounceIn')
       autocomplete:
         source: (search, showChoices) ->
           that = this

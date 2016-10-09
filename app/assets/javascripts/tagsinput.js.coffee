@@ -14,10 +14,12 @@ $(document).on 'turbolinks:load', ->
             ajaxTags.abort()
           ajaxTags = $.ajax
             url: '/tags'
-            data: query: search.term
+            data:
+              query: search.term
+              assigned_tags: that.assignedTags()
             success: (choices) ->
               showChoices that._subtractArray(choices, that.assignedTags())
-        delay: 300
+        delay: 0
         minLength: 2
 
 $(document).on 'focus', 'input[type="text"].ui-widget-content.ui-autocomplete-input', ->

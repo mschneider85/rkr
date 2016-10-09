@@ -18,6 +18,7 @@ ul.tagit {
     margin-left: 6px;
     outline: none;
     padding: 0;
+    text-transform: lowercase;
     width: inherit;
   }
 
@@ -28,7 +29,6 @@ ul.tagit {
   }
 
   li.tagit-choice {
-
     background-color: #5bc0de;
     border-radius: .25em;
     color: #fff;
@@ -40,6 +40,7 @@ ul.tagit {
     margin-top: 6px;
     padding: .2em .6em .3em;
     text-align: center;
+    text-transform: lowercase;
     vertical-align: baseline;
     white-space: nowrap;
 

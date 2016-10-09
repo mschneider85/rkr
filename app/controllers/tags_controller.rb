@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
   def index
-    render json: Tag.popular_for(params[:query]).pluck(:name)
+    render json: ActsAsTaggableOn::Tag.named_like(params[:query]).most_used(5).pluck(:name)
   end
 end

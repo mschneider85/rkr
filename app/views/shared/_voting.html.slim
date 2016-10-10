@@ -2,8 +2,8 @@ span
   strong
     = pluralize votable.reputation, 'kudo'
 
-= link_to votes_path(vote: { votable_type: votable.class.name, votable_id: votable.id, direction: :up }), method: :post, remote: true, class: ['button', ('active' if voted?(votable, :up)), ('disabled' if votable.author == current_user)].compact.join(' ') do
+= link_to votes_path(vote: { votable_type: votable.class.name, votable_id: votable.id, direction: :up }), method: :post, remote: true, class: ['button', ('active' if voted?(votable, :up)), ('disabled' unless can_vote?(votable, :up))].compact.join(' ') do
   = ion_icon 'arrow-up-b'
 
-= link_to votes_path(vote: { votable_type: votable.class.name, votable_id: votable.id, direction: :down }), method: :post, remote: true, class: ['button', ('active' if voted?(votable, :down)), ('disabled' if votable.author == current_user)].compact.join(' ') do
+= link_to votes_path(vote: { votable_type: votable.class.name, votable_id: votable.id, direction: :down }), method: :post, remote: true, class: ['button', ('active' if voted?(votable, :down)), ('disabled' unless can_vote?(votable, :down))].compact.join(' ') do
   = ion_icon 'arrow-down-b'

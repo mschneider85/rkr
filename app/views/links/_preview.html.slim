@@ -34,7 +34,7 @@ hr
 
 coffee:
   $(document).ready ->
-  
+
     slideCount = $('#slider ul li').length
     slideWidth = $('#slider ul li').width()
     slideHeight = $('#slider ul li').height()
@@ -49,7 +49,7 @@ coffee:
       $('#slider ul').animate { left: -slideWidth }, 200, ->
         $('#slider ul li:first-child').appendTo '#slider ul'
         $('#slider ul').css 'left', ''
-        
+
     stopPlayback = ->
       $('#slider iframe').attr('src', $('#slider iframe').attr('src'));
 
@@ -60,11 +60,11 @@ coffee:
       width: sliderUlWidth
       marginLeft: -slideWidth
     $('#slider ul li:last-child').prependTo '#slider ul'
-    
+
     $('a.control_prev').click (e)->
       stopPlayback()
       moveLeft()
-      
+
     $('a.control_next').click ->
       stopPlayback()
       moveRight()

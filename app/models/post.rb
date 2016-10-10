@@ -5,7 +5,6 @@ class Post < ApplicationRecord
   has_one :temp_association, as: :temp_associatable, dependent: :destroy
   has_many :votes, as: :votable, dependent: :destroy
 
-  attr_accessor :reputation
   alias_attribute :reputation, :votes_sum
 
   scope :order_weekly, -> { order("date_trunc('week', created_at) desc") }

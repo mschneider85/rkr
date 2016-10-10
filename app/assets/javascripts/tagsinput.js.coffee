@@ -10,9 +10,7 @@ $(document).on 'turbolinks:load', ->
       autocomplete:
         source: (search, showChoices) ->
           that = this
-          if ajaxTags && ajaxTags.readyState != 4
-            ajaxTags.abort()
-          ajaxTags = $.ajax
+          $.ajax
             url: '/tags'
             data:
               query: search.term

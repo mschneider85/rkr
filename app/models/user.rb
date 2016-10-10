@@ -3,10 +3,12 @@ class User < ApplicationRecord
 
   has_many :identities, dependent: :destroy
   has_many :snippets, foreign_key: :author_id
+  has_many :links, foreign_key: :author_id
   has_many :votes, foreign_key: :voter_id
 
   # Add more model_votes like this
   has_many :snippet_votes, through: :snippets, source: :votes
+  has_many :link_votes, through: :links, source: :votes
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
@@ -17,18 +19,10 @@ class User < ApplicationRecord
   end
 
   def reputation
-    snippet_votes.sum(:value)
-  end
-
-  def can_vote?(votable, direction)
-    is_votable?(votable) && votes.build(value: direction, votable: votable, can_update_vote: true).valid?
+    snippet_votes.sum(:value) + link_votes.sum(:value)
   end
 
   private
-
-  def is_votable?(object)
-    object.class.reflect_on_association(:votes).type.present?
-  end
 
   def recent_identity
     @recent_identity ||= identities.order(last_sign_in_at: :desc).first

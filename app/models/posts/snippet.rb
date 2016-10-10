@@ -4,10 +4,6 @@ class Snippet < Post
 
   validates :title, :body, presence: true
 
-  def highlight_class
-    LANGUAGES.find(language)[:highlight_class]
-  end
-
   def mode
     LANGUAGES.find(language)[:mode]
   end
@@ -15,7 +11,7 @@ class Snippet < Post
   class LANGUAGES
     class << self
       def all
-        HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../languages.yml', __FILE__))))
+        @all ||= HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../languages.yml', __FILE__))))
       end
 
       def find(term)

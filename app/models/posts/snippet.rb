@@ -1,5 +1,7 @@
-class Snippet < Post
+class Snippet < ApplicationRecord
+  include Postable
   acts_as_taggable
+
   enum language: [:ruby, :yaml, :css, :scss, :sass, :javascript, :coffeescript, :html, :haml, :slim, :erb, :markdown, :shell, :plain]
 
   validates :title, :body, presence: true
@@ -11,7 +13,7 @@ class Snippet < Post
   class LANGUAGES
     class << self
       def all
-        @all ||= HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../languages.yml', __FILE__))))
+        HashWithIndifferentAccess.new(YAML.load(File.read(File.expand_path('../languages.yml', __FILE__))))
       end
 
       def find(term)

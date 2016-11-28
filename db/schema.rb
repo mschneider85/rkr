@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004190838) do
+ActiveRecord::Schema.define(version: 20161124212802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "identities", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "user_id",         null: false
@@ -121,5 +127,37 @@ ActiveRecord::Schema.define(version: 20161004190838) do
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
     t.index ["voter_id"], name: "index_votes_on_voter_id", using: :btree
   end
+
+
+  create_view :posts, materialized: true,  sql_definition: <<-SQL
+      SELECT links.id AS searchable_id,
+      'Link'::text AS searchable_type,
+      links.title,
+      links.url AS body,
+      links.votes_count,
+      links.votes_sum,
+      round((((log((GREATEST(abs(links.votes_sum), 1))::double precision) * sign((links.votes_sum)::double precision)) + ((date_part('epoch'::text, links.created_at) - (1134028003)::double precision) / (45000.0)::double precision)))::numeric, 7) AS hotness,
+      links.created_at,
+      links.author_id
+     FROM links
+  UNION
+   SELECT snippets.id AS searchable_id,
+      'Snippet'::text AS searchable_type,
+      snippets.title,
+      snippets.body,
+      snippets.votes_count,
+      snippets.votes_sum,
+      round((((log((GREATEST(abs(snippets.votes_sum), 1))::double precision) * sign((snippets.votes_sum)::double precision)) + ((date_part('epoch'::text, snippets.created_at) - (1134028003)::double precision) / (45000.0)::double precision)))::numeric, 7) AS hotness,
+      snippets.created_at,
+      snippets.author_id
+     FROM snippets;
+  SQL
+
+  add_index "posts", "date_trunc('week'::text, created_at)", name: "posts_creation_week_index", using: :btree
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
+  add_index "posts", ["created_at"], name: "index_posts_on_created_at", using: :btree
+  add_index "posts", ["hotness"], name: "index_posts_on_hotness", using: :btree
+  add_index "posts", ["votes_count"], name: "index_posts_on_votes_count", using: :btree
+  add_index "posts", ["votes_sum"], name: "index_posts_on_votes_sum", using: :btree
 
 end

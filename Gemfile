@@ -31,6 +31,8 @@ gem 'link_thumbnailer', '~> 3.3'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'jquery-ui-rails'
 gem 'tag-it-rails'
+gem 'pg_search', '~> 1.0', '>= 1.0.6'
+gem 'scenic', '~> 1.3'
 
 gem 'devise'
 gem 'omniauth-github'

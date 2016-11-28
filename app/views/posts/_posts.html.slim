@@ -1,0 +1,35 @@
+- @posts.each do |post|
+  - if post.searchable_type == 'Link'
+    - link = post.searchable
+    - preview = OpenStruct.new(link.preview)
+    .card
+      .card-header
+        .card-title
+          = link.title
+      .card-content
+        .row.url-preview.url-preview-small
+          .three.columns
+            .preview-image style=("background-image: url(\"#{preview.images[0].to_s}\");" if preview.images)
+          .nine.columns
+            p= link_to link.url, link.url, target: '_blank'
+            h5
+              = preview.title
+              = image_tag(preview.favicon, class: 'preview-icon') if preview.favicon
+            p= preview.description
+      .card-footer
+        .toolbar.voting.u-pull-right data-id="#{link.id}"
+          = render 'shared/voting', votable: link
+        .u-cf
+  - elsif post.searchable_type == 'Snippet'
+    - snippet = post.searchable
+    .card
+      .card-header
+        .card-title
+          = snippet.title
+      .card-content
+        .code data-mode=(snippet.mode)
+          = snippet.body
+      .card-footer
+        .toolbar.voting.u-pull-right data-id="#{snippet.id}"
+          = render 'shared/voting', votable: snippet
+        .u-cf

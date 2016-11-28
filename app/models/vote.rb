@@ -15,6 +15,7 @@ class Vote < ApplicationRecord
 
   after_commit do
     RefreshCacheColumnsJob.new.perform(votable)
+    RefreshMaterializedView.call(:posts)
   end
 
   private

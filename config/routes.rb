@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :links, only: [:index, :new, :create] do
     get :load_preview, on: :collection
   end
-  resources :votes, only: [:create] do
-  end
+  resources :votes, only: :create
+  resources :posts, only: :index
   root 'home#index'
 end

@@ -1,6 +1,6 @@
 class SnippetsController < ApplicationController
   def index
-    @snippets = Snippet.trending.page(params[:page]).per(10)
+    @snippets = Snippet.trending.includes(:votes).page(params[:page]).per(10)
   end
 
   def new

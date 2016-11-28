@@ -1,0 +1,4 @@
+.infinite-table
+  = render 'posts', posts: @posts          
+.p.pagination data-title='Fetching more posts...'
+  = link_to_next_page(@posts, 'Next Page', remote: true)

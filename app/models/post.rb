@@ -1,14 +1,35 @@
 class Post < ApplicationRecord
-  self.abstract_class = true
+  include PgSearch
 
+  mattr_accessor :last_refresh
+
+  self.primary_key = 'searchable_id'
+
+  belongs_to :searchable, polymorphic: true
   belongs_to :author, class_name: 'User', optional: true
-  has_one :temp_association, as: :temp_associatable, dependent: :destroy
-  has_many :votes, as: :votable, dependent: :destroy
 
-  alias_attribute :reputation, :votes_sum
+  delegate :updated_at, to: :searchable
 
-  scope :order_weekly, -> { order("date_trunc('week', created_at) desc") }
-  scope :trending, -> { order_weekly.order(votes_sum: :desc, created_at: :desc) }
-  scope :hot, -> { order_weekly.order(votes_count: :desc, created_at: :desc) }
-  scope :newest_first, -> { order(created_at: :desc) }
+  def language
+    searchable.language if searchable_type == 'Snippet'
+  end
+
+  def preview
+    searchable.preview if searchable_type == 'Link'
+  end
+
+  pg_search_scope :search,
+                  against: [
+                    [:title, 'A'],
+                    [:body, 'B']
+                  ],
+                  using: {
+                    tsearch: { prefix: true, dictionary: 'english', any_word: true, highlight: true }
+                  }
+
+  private
+
+  def readonly?
+    true
+  end
 end

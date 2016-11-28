@@ -4,7 +4,7 @@ class Link < ApplicationRecord
 
   store_accessor :preview
 
-  has_one :post, foreign_key: 'searchable_id'
+  has_one :post, foreign_key: 'postable_id'
 
   validates :title, :url, presence: true
   validates :url, url: { allow_blank: true }

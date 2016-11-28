@@ -1,6 +1,6 @@
 - @posts.each do |post|
-  - if post.searchable_type == 'Link'
-    - link = post.searchable
+  - if post.postable_type == 'Link'
+    - link = post.postable
     - preview = OpenStruct.new(link.preview)
     .card
       .card-header
@@ -20,8 +20,8 @@
         .toolbar.voting.u-pull-right data-id="#{link.id}"
           = render 'shared/voting', votable: link
         .u-cf
-  - elsif post.searchable_type == 'Snippet'
-    - snippet = post.searchable
+  - elsif post.postable_type == 'Snippet'
+    - snippet = post.postable
     .card
       .card-header
         .card-title

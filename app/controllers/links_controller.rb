@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.trending.includes(:votes).page(params[:page]).per(10)
+    @links = Link.trending.page(params[:page]).per(10)
   end
 
   def new

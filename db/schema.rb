@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20161124212802) do
 
 
   create_view :posts, materialized: true,  sql_definition: <<-SQL
-      SELECT links.id AS searchable_id,
-      'Link'::text AS searchable_type,
+      SELECT links.id AS postable_id,
+      'Link'::text AS postable_type,
       links.title,
       links.url AS body,
       links.votes_count,
@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(version: 20161124212802) do
       links.author_id
      FROM links
   UNION
-   SELECT snippets.id AS searchable_id,
-      'Snippet'::text AS searchable_type,
+   SELECT snippets.id AS postable_id,
+      'Snippet'::text AS postable_type,
       snippets.title,
       snippets.body,
       snippets.votes_count,

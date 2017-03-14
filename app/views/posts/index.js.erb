@@ -1,12 +1,16 @@
-$("<%=j render('posts', posts: @posts) %>")
-  .appendTo($(".infinite-table"));
+<% if params[:append_page] %>
+  $("<%=j render('posts', posts: @posts) %>")
+    .appendTo($(".infinite-table"));
+<% else %>
+  $(".infinite-table").html("<%=j render('posts', posts: @posts) %>");
+<% end %>
 
 <% if @posts.last_page? %>
   $('.pagination')
     .html("No more posts.");
 <% else %>
   $('.pagination')
-    .html("<%=j link_to_next_page(@posts, 'Next Page', remote: true) %>");
+    .html("<%=j link_to_next_page(@posts, 'Next Page', remote: true, params: { search: params[:search], append_page: true }) %>");
 <% end %>
 
 $(document).trigger('turbolinks:load');

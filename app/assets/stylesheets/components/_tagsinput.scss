@@ -102,3 +102,8 @@ ul.tagit {
     position: absolute;
   }
 }
+
+.ui-helper-hidden-accessible {
+  left: -999em;
+  position: absolute;
+}

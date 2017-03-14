@@ -1,4 +1,7 @@
+= simple_form_for '', url: posts_path, method: :get, remote: true do |f|
+  = f.input :search, label: false
+  = f.button :submit, label: 'Search'
 .infinite-table
   = render 'posts', posts: @posts          
 .p.pagination data-title='Fetching more posts...'
-  = link_to_next_page(@posts, 'Next Page', remote: true)
+  = link_to_next_page(@posts, 'Next Page', remote: true, params: { search: params[:search], append_page: true })

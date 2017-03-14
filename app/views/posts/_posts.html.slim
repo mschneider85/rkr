@@ -1,17 +1,17 @@
-- @posts.each do |post|
+- posts.each do |post|
   - if post.postable_type == 'Link'
     - link = post.postable
     - preview = OpenStruct.new(link.preview)
     .card
       .card-header
         .card-title
-          = link.title
+          = highlight_search(link.title)
       .card-content
         .row.url-preview.url-preview-small
           .three.columns
             .preview-image style=("background-image: url(\"#{preview.images[0].to_s}\");" if preview.images)
           .nine.columns
-            p= link_to link.url, link.url, target: '_blank'
+            p= link_to link.url, highlight_search(link.url), target: '_blank'
             h5
               = preview.title
               = image_tag(preview.favicon, class: 'preview-icon') if preview.favicon
@@ -25,10 +25,10 @@
     .card
       .card-header
         .card-title
-          = snippet.title
+          = highlight_search(snippet.title)
       .card-content
         .code data-mode=(snippet.mode)
-          = snippet.body
+          = highlight_search(snippet.body)
       .card-footer
         .toolbar.voting.u-pull-right data-id="#{snippet.id}"
           = render 'shared/voting', votable: snippet

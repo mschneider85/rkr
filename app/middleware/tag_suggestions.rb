@@ -5,13 +5,15 @@ class TagSuggestions
 
   def call(env)
     if env['PATH_INFO'] == '/tags'
-      request = Rack::Request.new(env)
-      terms = query_tags(request.params['query'], request.params['assigned_tags'])
+      request_params = Rack::Request.new(env).params
+      terms = query_tags(request_params['query'], request_params['assigned_tags'])
       [200, { 'Content-Type' => 'application/json' }, [terms.to_json]]
     else
       @app.call(env)
     end
   end
+
+  private
 
   def query_tags(query, assigned_tags)
     ActsAsTaggableOn::Tag

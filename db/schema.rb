@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124212802) do
+ActiveRecord::Schema.define(version: 20161201151731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+  enable_extension "pg_trgm"
 
   create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
     t.string   "value"
@@ -130,7 +131,8 @@ ActiveRecord::Schema.define(version: 20161124212802) do
 
 
   create_view :posts, materialized: true,  sql_definition: <<-SQL
-      SELECT links.id AS postable_id,
+      SELECT uuid_generate_v4() AS id,
+      links.id AS postable_id,
       'Link'::text AS postable_type,
       links.title,
       links.url AS body,
@@ -138,10 +140,13 @@ ActiveRecord::Schema.define(version: 20161124212802) do
       links.votes_sum,
       round((((log((GREATEST(abs(links.votes_sum), 1))::double precision) * sign((links.votes_sum)::double precision)) + ((date_part('epoch'::text, links.created_at) - (1134028003)::double precision) / (45000.0)::double precision)))::numeric, 7) AS hotness,
       links.created_at,
-      links.author_id
+      links.author_id,
+      to_tsvector('english'::regconfig, (COALESCE(links.title, ''::character varying))::text) AS tsv_title,
+      to_tsvector('english'::regconfig, (COALESCE(links.url, ''::character varying))::text) AS tsv_body
      FROM links
   UNION
-   SELECT snippets.id AS postable_id,
+   SELECT uuid_generate_v4() AS id,
+      snippets.id AS postable_id,
       'Snippet'::text AS postable_type,
       snippets.title,
       snippets.body,
@@ -149,14 +154,21 @@ ActiveRecord::Schema.define(version: 20161124212802) do
       snippets.votes_sum,
       round((((log((GREATEST(abs(snippets.votes_sum), 1))::double precision) * sign((snippets.votes_sum)::double precision)) + ((date_part('epoch'::text, snippets.created_at) - (1134028003)::double precision) / (45000.0)::double precision)))::numeric, 7) AS hotness,
       snippets.created_at,
-      snippets.author_id
+      snippets.author_id,
+      to_tsvector('english'::regconfig, (COALESCE(snippets.title, ''::character varying))::text) AS tsv_title,
+      to_tsvector('english'::regconfig, COALESCE(snippets.body, ''::text)) AS tsv_body
      FROM snippets;
   SQL
 
+  add_index "posts", "body gin_trgm_ops", name: "index_posts_on_body_tgrm", using: :gin
   add_index "posts", "date_trunc('week'::text, created_at)", name: "posts_creation_week_index", using: :btree
+  add_index "posts", "title gin_trgm_ops", name: "index_posts_on_title_tgrm", using: :gin
   add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
   add_index "posts", ["created_at"], name: "index_posts_on_created_at", using: :btree
   add_index "posts", ["hotness"], name: "index_posts_on_hotness", using: :btree
+  add_index "posts", ["id"], name: "index_posts_on_id", unique: true, using: :btree
+  add_index "posts", ["tsv_body"], name: "index_posts_tsv_body", using: :gin
+  add_index "posts", ["tsv_title"], name: "index_posts_tsv_title", using: :gin
   add_index "posts", ["votes_count"], name: "index_posts_on_votes_count", using: :btree
   add_index "posts", ["votes_sum"], name: "index_posts_on_votes_sum", using: :btree
 
